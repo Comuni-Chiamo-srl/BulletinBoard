@@ -417,6 +417,11 @@ extension BLTNItemManager {
         push(item: next)
 
     }
+    
+    public func removeImageView() {
+        currentItem.isWithImageView = false
+        refreshCurrentItemInterface(elementsChanged: true)
+    }
 
 }
 
@@ -494,7 +499,6 @@ extension BLTNItemManager {
      *
      * - parameter animated: Whether to animate dismissal. Defaults to `true`.
      */
-
     @objc(dismissBulletinAnimated:)
     public func dismissBulletin(animated: Bool = true) {
 
@@ -515,9 +519,7 @@ extension BLTNItemManager {
     /**
      * Tears down the view controller and item stack after dismissal is finished.
      */
-
     @nonobjc func completeDismissal() {
-
         currentItem.onDismiss()
 
         for arrangedSubview in bulletinController.contentStackView.arrangedSubviews {
@@ -536,13 +538,10 @@ extension BLTNItemManager {
 
         currentItem = self.rootItem
         itemsStack.removeAll()
-
     }
-
 }
 
 // MARK: - Transitions
-
 extension BLTNItemManager {
 
     var needsCloseButton: Bool {
@@ -551,7 +550,6 @@ extension BLTNItemManager {
 
     /// Refreshes the interface for the current item.
     fileprivate func refreshCurrentItemInterface(elementsChanged: Bool = true) {
-
         bulletinController.isDismissable = false
         bulletinController.swipeInteractionController?.cancelIfNeeded()
         bulletinController.refreshSwipeInteractionController()
@@ -560,10 +558,8 @@ extension BLTNItemManager {
         let contentAlpha: CGFloat =  showActivityIndicator ? 0 : 1
 
         // Tear down old item
-
         let oldArrangedSubviews = bulletinController.contentStackView.arrangedSubviews
         let oldHideableArrangedSubviews = recursiveArrangedSubviews(in: oldArrangedSubviews)
-
         if elementsChanged {
             previousItem?.tearDown()
             previousItem?.manager = nil
@@ -571,133 +567,95 @@ extension BLTNItemManager {
         }
 
         // Create new views
-
         let newArrangedSubviews = currentItem.makeArrangedSubviews()
         let newHideableArrangedSubviews = recursiveArrangedSubviews(in: newArrangedSubviews)
-
         if elementsChanged {
-
             currentItem.setUp()
             currentItem.manager = self
-
             for arrangedSubview in newHideableArrangedSubviews {
                 arrangedSubview.isHidden = isPreparing ? false : true
             }
-
             for arrangedSubview in newArrangedSubviews {
                 bulletinController.contentStackView.addArrangedSubview(arrangedSubview)
             }
-
         }
 
         // Animate transition
-
         let animationDuration = isPreparing ? 0 : 0.75
         let transitionAnimationChain = AnimationChain(duration: animationDuration)
-
         let hideSubviewsAnimationPhase = AnimationPhase(relativeDuration: 1/3, curve: .linear)
-
         hideSubviewsAnimationPhase.block = {
-
             if !showActivityIndicator {
                 self.bulletinController.hideActivityIndicator()
             }
-
             for arrangedSubview in oldArrangedSubviews {
                 arrangedSubview.alpha = 0
             }
-
             for arrangedSubview in newArrangedSubviews {
                 arrangedSubview.alpha = 0
             }
-
         }
 
         let displayNewItemsAnimationPhase = AnimationPhase(relativeDuration: 1/3, curve: .linear)
-
         displayNewItemsAnimationPhase.block = {
-
             for arrangedSubview in oldHideableArrangedSubviews {
                 arrangedSubview.isHidden = true
             }
-
             for arrangedSubview in newHideableArrangedSubviews {
                 arrangedSubview.isHidden = false
             }
-
         }
-        
         displayNewItemsAnimationPhase.completionHandler = {
             self.currentItem.willDisplay()
         }
 
         let finalAnimationPhase = AnimationPhase(relativeDuration: 1/3, curve: .linear)
-
         finalAnimationPhase.block = {
-
             let currentElements = elementsChanged ? newArrangedSubviews : oldArrangedSubviews
             self.bulletinController.contentStackView.alpha = contentAlpha
             self.bulletinController.updateCloseButton(isRequired: self.needsCloseButton && !showActivityIndicator)
-
             for arrangedSubview in currentElements {
                 arrangedSubview.alpha = contentAlpha
             }
-
         }
 
         finalAnimationPhase.completionHandler = {
-
             self.bulletinController.isDismissable = self.currentItem.isDismissable && (showActivityIndicator == false)
-
             if elementsChanged {
-
                 self.currentItem.onDisplay()
-
                 for arrangedSubview in oldArrangedSubviews {
                     self.bulletinController.contentStackView.removeArrangedSubview(arrangedSubview)
                     arrangedSubview.removeFromSuperview()
                 }
-
             }
-
             UIAccessibility.post(notification: .screenChanged, argument: newArrangedSubviews.first)
-
         }
 
         // Perform animation
-
         if elementsChanged {
             transitionAnimationChain.add(hideSubviewsAnimationPhase)
             transitionAnimationChain.add(displayNewItemsAnimationPhase)
         } else {
             bulletinController.hideActivityIndicator()
         }
-
         transitionAnimationChain.add(finalAnimationPhase)
         transitionAnimationChain.start()
-
     }
 
     /// Tears down every item on the stack starting from the specified item.
     fileprivate func tearDownItemsChain(startingAt item: BLTNItem) {
-
         item.tearDown()
         item.manager = nil
-
         if let next = item.next {
             tearDownItemsChain(startingAt: next)
             item.next = nil
         }
-
     }
 
     /// Returns all the arranged subviews.
     private func recursiveArrangedSubviews(in views: [UIView]) -> [UIView] {
-
         var arrangedSubviews: [UIView] = []
-
         for view in views {
-
             if let stack = view as? UIStackView {
                 arrangedSubviews.append(stack)
                 let recursiveViews = self.recursiveArrangedSubviews(in: stack.arrangedSubviews)
@@ -705,19 +663,13 @@ extension BLTNItemManager {
             } else {
                 arrangedSubviews.append(view)
             }
-
         }
-
         return arrangedSubviews
-
     }
-
 }
 
 // MARK: - Utilities
-
 extension BLTNItemManager {
-
     fileprivate func assertIsMainThread() {
         precondition(Thread.isMainThread, "BLTNItemManager must only be used from the main thread.")
     }
@@ -725,5 +677,4 @@ extension BLTNItemManager {
     fileprivate func assertIsPrepared() {
         precondition(isPrepared, "You must call the `prepare` function before interacting with the bulletin.")
     }
-
 }

@@ -61,6 +61,9 @@ import UIKit
      */
 
     @objc open var shouldRespondToKeyboardChanges: Bool = true
+    
+    
+    @objc open var isWithImageView: Bool = true
 
     /**
      * The item to display after this one.
@@ -79,8 +82,7 @@ import UIKit
      *
      * - parameter item: The item that is being presented.
      */
-
-        @objc open var presentationHandler: ((BLTNItem) -> Void)?
+    @objc open var presentationHandler: ((BLTNItem) -> Void)?
 
     /**
      * The block of code to execute when the bulletin item is dismissed. This is called when the bulletin

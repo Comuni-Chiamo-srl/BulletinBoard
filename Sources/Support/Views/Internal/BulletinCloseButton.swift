@@ -135,17 +135,17 @@ extension UIImage {
         shape.addLine(to: CGPoint(x: 13.15, y: 18.01))
         shape.addLine(to: CGPoint(x: 0.93, y: 30.21))
         shape.close()
-        
+
         let size = CGSize(width: 36, height: 36)
         UIGraphicsBeginImageContext(size)
-        
+
         defer {
             UIGraphicsEndImageContext()
         }
-        
+
         UIColor.black.setFill()
         shape.fill()
-        
+
         return UIGraphicsGetImageFromCurrentImageContext()!
     }
 }

@@ -81,6 +81,11 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 // MARK: - Lifecycle
 
 extension BulletinViewController {
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        manager?.removeImageView()
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -116,7 +121,6 @@ extension BulletinViewController {
         view.addSubview(contentView)
 
         // Content View
-
         centerXConstraint = contentView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
 
         centerYConstraint = contentView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
@@ -126,11 +130,10 @@ extension BulletinViewController {
         widthConstraint.priority = .required
 
         // Close button
-
         contentView.addSubview(closeButton)
         closeButton.translatesAutoresizingMaskIntoConstraints = false
-        closeButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
-        closeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8).isActive = true
+        closeButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12).isActive = true
+        closeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12).isActive = true
         closeButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
         closeButton.widthAnchor.constraint(equalToConstant: 48).isActive = true
         closeButton.isUserInteractionEnabled = true
@@ -138,7 +141,6 @@ extension BulletinViewController {
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
 
         // Content Stack View
-
         contentView.addSubview(contentStackView)
 
         stackLeadingConstraint = contentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor)
@@ -308,7 +310,7 @@ extension BulletinViewController {
     // MARK: - Transition Adaptivity
 
     var defaultBottomMargin: CGFloat {
-        return manager?.edgeSpacing.rawValue ?? 8
+        return manager?.edgeSpacing.rawValue ?? 12
     }
 
     func bottomMargin() -> CGFloat {
@@ -316,10 +318,10 @@ extension BulletinViewController {
             return 0
         }
 
-        var bottomMargin: CGFloat = manager?.edgeSpacing.rawValue ?? 8
+        var bottomMargin: CGFloat = manager?.edgeSpacing.rawValue ?? 12
 
         if manager?.hidesHomeIndicator == true {
-            bottomMargin = manager?.edgeSpacing.rawValue == 0 ? 0 : 4
+            bottomMargin = manager?.edgeSpacing.rawValue == 0 ? 0 : 6
         }
 
         return bottomMargin
@@ -579,7 +581,7 @@ extension BulletinViewController {
 
             self.minYConstraint.isActive = false
             self.contentBottomConstraint.constant = bottomSpacing
-            self.centerYConstraint.constant = -(keyboardFrameFinal.size.height + 8) / 2
+            self.centerYConstraint.constant = -(keyboardFrameFinal.size.height + 12) / 2
             self.contentView.superview?.layoutIfNeeded()
         
         }, completion: nil)

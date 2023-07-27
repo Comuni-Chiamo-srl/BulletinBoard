@@ -187,7 +187,7 @@ import UIKit
         insertComplementaryViews(makeViewsUnderTitle)
         
         // Image View
-        if let image = self.image {
+        if let image = self.image, self.isWithImageView {
             let imageView = UIImageView(image: image)
             imageView.contentMode = .scaleAspectFit
             imageView.tintColor = appearance.imageViewTintColor
