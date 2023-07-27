@@ -84,7 +84,14 @@ extension BulletinViewController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        manager?.removeImageView()
+        switch UIDevice.current.orientation {
+            case .portrait, .portraitUpsideDown:
+                manager?.showImageView()
+            case .landscapeLeft, .landscapeRight:
+                manager?.removeImageView()
+            default:
+                manager?.showImageView()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

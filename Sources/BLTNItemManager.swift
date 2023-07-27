@@ -419,8 +419,16 @@ extension BLTNItemManager {
     }
     
     public func removeImageView() {
-        currentItem.isWithImageView = false
-        refreshCurrentItemInterface(elementsChanged: true)
+        if currentItem.isWithImageView {
+            currentItem.isWithImageView = false
+            refreshCurrentItemInterface(elementsChanged: true)
+        }
+    }
+    public func showImageView() {
+        if !currentItem.isWithImageView {
+            currentItem.isWithImageView = true
+            refreshCurrentItemInterface(elementsChanged: true)
+        }
     }
 
 }

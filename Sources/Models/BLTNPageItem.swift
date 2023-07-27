@@ -206,6 +206,8 @@ import UIKit
             self.imageView = imageView
             contentViews.append(imageView)
             insertComplementaryViews(makeViewsUnderImage)
+        } else {
+            self.isWithImageView = false
         }
         
         // Description Label

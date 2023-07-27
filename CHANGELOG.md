@@ -1,5 +1,9 @@
 # _BulletinBoard_ Changelog
 ## Unreleased
+## 🔖 v5.0.4
+### Fixes
+- Fixed device orientation management
+
 ## 🔖 v5.0.3
 ### Fixes
 - Trying to hiding the image in landscape mode
