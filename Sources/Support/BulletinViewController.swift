@@ -129,10 +129,10 @@ extension BulletinViewController {
 
         contentView.addSubview(closeButton)
         closeButton.translatesAutoresizingMaskIntoConstraints = false
-        closeButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12).isActive = true
-        closeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12).isActive = true
-        closeButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        closeButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
+        closeButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
+        closeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8).isActive = true
+        closeButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        closeButton.widthAnchor.constraint(equalToConstant: 48).isActive = true
         closeButton.isUserInteractionEnabled = true
 
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
@@ -308,7 +308,7 @@ extension BulletinViewController {
     // MARK: - Transition Adaptivity
 
     var defaultBottomMargin: CGFloat {
-        return manager?.edgeSpacing.rawValue ?? 12
+        return manager?.edgeSpacing.rawValue ?? 8
     }
 
     func bottomMargin() -> CGFloat {
@@ -316,10 +316,10 @@ extension BulletinViewController {
             return 0
         }
 
-        var bottomMargin: CGFloat = manager?.edgeSpacing.rawValue ?? 12
+        var bottomMargin: CGFloat = manager?.edgeSpacing.rawValue ?? 8
 
         if manager?.hidesHomeIndicator == true {
-            bottomMargin = manager?.edgeSpacing.rawValue == 0 ? 0 : 6
+            bottomMargin = manager?.edgeSpacing.rawValue == 0 ? 0 : 4
         }
 
         return bottomMargin
@@ -579,7 +579,7 @@ extension BulletinViewController {
 
             self.minYConstraint.isActive = false
             self.contentBottomConstraint.constant = bottomSpacing
-            self.centerYConstraint.constant = -(keyboardFrameFinal.size.height + 12) / 2
+            self.centerYConstraint.constant = -(keyboardFrameFinal.size.height + 8) / 2
             self.contentView.superview?.layoutIfNeeded()
         
         }, completion: nil)

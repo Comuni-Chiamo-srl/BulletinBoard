@@ -1,5 +1,10 @@
 # _BulletinBoard_ Changelog
 ## Unreleased
+## 🔖 v5.0.2
+### Fixes
+- Fixed some of the new parameters
+- Fixed some constraints for landscape view 
+
 ## 🔖 v5.0.1
 ### Changes
 - Added new parameters to make the view more customizable

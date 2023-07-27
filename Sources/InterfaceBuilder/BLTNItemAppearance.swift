@@ -77,15 +77,8 @@ import UIKit
     }()
 
     // MARK: - Corner Radius Customization
-    
-    /// The corner radius of the action button set as half height.
-    @objc public var actionButtonCornerRadiusHalfHeigth: Bool = false
-
     /// The corner radius of the action button (default 12).
     @objc public var actionButtonCornerRadius: CGFloat = 12
-    
-    /// The corner radius of the action button set as half height.
-    @objc public var alternativeButtonCornerRadiusHalfHeigth: Bool = false
 
     /// The corner radius of the alternative button (default 12).
     @objc public var alternativeButtonCornerRadius: CGFloat = 12

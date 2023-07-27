@@ -182,7 +182,7 @@ import UIKit
         subviews += makeContentViews(with: interfaceBuilder)
         
         // Buttons
-        let buttonsStack = interfaceBuilder.makeGroupStack(spacing: 10)
+        let buttonsStack = interfaceBuilder.makeGroupStack(spacing: 8)
         if let actionButtonTitle = actionButtonTitle {
             let buttonView = interfaceBuilder.makeActionButton(title: actionButtonTitle)
             buttonsStack.addArrangedSubview(buttonView)

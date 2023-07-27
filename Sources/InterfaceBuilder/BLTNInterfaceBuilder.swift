@@ -95,11 +95,7 @@ import UIKit
     @objc open func makeActionButton(title: String) -> BLTNHighlightButtonWrapper {
 
         let actionButton = HighlightButton()
-        if appearance.actionButtonCornerRadiusHalfHeigth {
-            actionButton.layer.cornerRadius = actionButton.frame.height / 2
-        } else {
-            actionButton.layer.cornerRadius = appearance.actionButtonCornerRadius
-        }
+        actionButton.layer.cornerRadius = appearance.actionButtonCornerRadius
         
         if #available(iOS 13, *) {
             actionButton.layer.cornerCurve = .continuous
@@ -128,8 +124,8 @@ import UIKit
         let wrapper = BLTNHighlightButtonWrapper(button: actionButton)
         wrapper.setContentHuggingPriority(.defaultLow, for: .horizontal)
 
-        let heightConstraint = wrapper.heightAnchor.constraint(equalToConstant: 64)
-        heightConstraint.priority = .defaultHigh
+        let heightConstraint = wrapper.heightAnchor.constraint(equalToConstant: 48)
+        heightConstraint.priority = .required
         heightConstraint.isActive = true
 
         return wrapper
@@ -147,11 +143,7 @@ import UIKit
     @objc open func makeAlternativeButton(title: String) -> UIButton {
 
         let alternativeButton = UIButton()
-        if appearance.alternativeButtonCornerRadiusHalfHeigth {
-            alternativeButton.layer.cornerRadius = alternativeButton.frame.height / 2
-        } else {
-            alternativeButton.layer.cornerRadius = appearance.alternativeButtonCornerRadius
-        }
+        alternativeButton.layer.cornerRadius = appearance.alternativeButtonCornerRadius
         
         if #available(iOS 13, *) {
             alternativeButton.layer.cornerCurve = .continuous
@@ -166,6 +158,10 @@ import UIKit
           alternativeButton.layer.borderColor = color.cgColor
           alternativeButton.layer.borderWidth = appearance.alternativeButtonBorderWidth
         }
+        
+        let heightConstraint = alternativeButton.heightAnchor.constraint(equalToConstant: 48)
+        heightConstraint.priority = .required
+        heightConstraint.isActive = true
 
         return alternativeButton
 
@@ -174,10 +170,10 @@ import UIKit
     /**
      * Creates a stack view to contain a group of objects.
      *
-     * - parameter spacing: The spacing between elements. Defaults to `10`.
+     * - parameter spacing: The spacing between elements. Defaults to `8`.
      */
 
-    @objc open func makeGroupStack(spacing: CGFloat = 10) -> UIStackView {
+    @objc open func makeGroupStack(spacing: CGFloat = 8) -> UIStackView {
 
         let buttonsStack = UIStackView()
         buttonsStack.axis = .vertical
