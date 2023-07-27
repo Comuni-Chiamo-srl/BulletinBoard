@@ -36,9 +36,13 @@
 		5E437A37248971BC009DBF9A /* BLTNItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E437A36248971BC009DBF9A /* BLTNItem.swift */; };
 		5E9D326D2108FCED0032FB06 /* BLTNBoardSwiftSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E9D326C2108FCED0032FB06 /* BLTNBoardSwiftSupport.h */; };
 		5EB7CFE5248541EA0052D611 /* BLTNItemManager+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB7CFE4248541EA0052D611 /* BLTNItemManager+Helpers.swift */; };
+		F5D6EF94551331FD5A5E444B /* Pods_BLTNBoard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BB7D80852F24F83831D0B0D /* Pods_BLTNBoard.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1BB7D80852F24F83831D0B0D /* Pods_BLTNBoard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BLTNBoard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EB87105855165F12D7B4CBB /* Pods-BLTNBoard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLTNBoard.debug.xcconfig"; path = "Target Support Files/Pods-BLTNBoard/Pods-BLTNBoard.debug.xcconfig"; sourceTree = "<group>"; };
+		514EF8FCE6BC410104479677 /* Pods-BLTNBoard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLTNBoard.release.xcconfig"; path = "Target Support Files/Pods-BLTNBoard/Pods-BLTNBoard.release.xcconfig"; sourceTree = "<group>"; };
 		52D6D97C1BEFF229002C0205 /* BLTNBoard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BLTNBoard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		550675681F90A0A500874D8B /* BLTNBackgroundViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTNBackgroundViewStyle.swift; sourceTree = "<group>"; };
 		551D2D9B1FC060E90078DB21 /* BLTNItemAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTNItemAppearance.swift; sourceTree = "<group>"; };
@@ -80,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5D6EF94551331FD5A5E444B /* Pods_BLTNBoard.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +99,7 @@
 				52D6D99C1BEFF38C002C0205 /* Configs */,
 				52D6D97D1BEFF229002C0205 /* Products */,
 				558D8091218DCA81000ADAFD /* Frameworks */,
+				BF9D5BE974BEF65F5EAF4B62 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -118,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				558D8092218DCA81000ADAFD /* FBSnapshotTestCase.framework */,
+				1BB7D80852F24F83831D0B0D /* Pods_BLTNBoard.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -222,6 +229,16 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
+		BF9D5BE974BEF65F5EAF4B62 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2EB87105855165F12D7B4CBB /* Pods-BLTNBoard.debug.xcconfig */,
+				514EF8FCE6BC410104479677 /* Pods-BLTNBoard.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -240,6 +257,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 52D6D9901BEFF229002C0205 /* Build configuration list for PBXNativeTarget "BLTNBoard" */;
 			buildPhases = (
+				3ABD589F5336DEA06EBC3D0C /* [CP] Check Pods Manifest.lock */,
 				52D6D9771BEFF229002C0205 /* Sources */,
 				52D6D9781BEFF229002C0205 /* Frameworks */,
 				52D6D9791BEFF229002C0205 /* Headers */,
@@ -331,6 +349,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3ABD589F5336DEA06EBC3D0C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BLTNBoard-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		52D6D9771BEFF229002C0205 /* Sources */ = {
@@ -491,6 +534,7 @@
 		};
 		52D6D9911BEFF229002C0205 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2EB87105855165F12D7B4CBB /* Pods-BLTNBoard.debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -515,6 +559,7 @@
 		};
 		52D6D9921BEFF229002C0205 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 514EF8FCE6BC410104479677 /* Pods-BLTNBoard.release.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;

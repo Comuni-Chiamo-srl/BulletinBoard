@@ -33,6 +33,7 @@ import UIKit
         titleLabel.accessibilityTraits.insert(.header)
         titleLabel.numberOfLines = 2
         titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.adjustsFontForContentSizeCategory = true
         titleLabel.lineBreakMode = .byWordWrapping
 
         titleLabel.font = appearance.makeTitleFont()
@@ -51,6 +52,7 @@ import UIKit
         descriptionLabel.textAlignment = .center
         descriptionLabel.textColor = appearance.descriptionTextColor
         descriptionLabel.numberOfLines = 0
+        descriptionLabel.adjustsFontForContentSizeCategory = true
         descriptionLabel.font = appearance.makeDescriptionFont()
 
         return descriptionLabel
@@ -75,6 +77,7 @@ import UIKit
         textField.placeholder = placeholder
         textField.borderStyle = .roundedRect
         textField.returnKeyType = returnKey
+        textField.adjustsFontForContentSizeCategory = true
 
         return textField
 
@@ -92,7 +95,11 @@ import UIKit
     @objc open func makeActionButton(title: String) -> BLTNHighlightButtonWrapper {
 
         let actionButton = HighlightButton()
-        actionButton.layer.cornerRadius = appearance.actionButtonCornerRadius
+        if appearance.actionButtonCornerRadiusHalfHeigth {
+            actionButton.layer.cornerRadius = actionButton.frame.height / 2
+        } else {
+            actionButton.layer.cornerRadius = appearance.actionButtonCornerRadius
+        }
         
         if #available(iOS 13, *) {
             actionButton.layer.cornerCurve = .continuous
@@ -121,7 +128,7 @@ import UIKit
         let wrapper = BLTNHighlightButtonWrapper(button: actionButton)
         wrapper.setContentHuggingPriority(.defaultLow, for: .horizontal)
 
-        let heightConstraint = wrapper.heightAnchor.constraint(equalToConstant: 55)
+        let heightConstraint = wrapper.heightAnchor.constraint(equalToConstant: 64)
         heightConstraint.priority = .defaultHigh
         heightConstraint.isActive = true
 
@@ -140,7 +147,11 @@ import UIKit
     @objc open func makeAlternativeButton(title: String) -> UIButton {
 
         let alternativeButton = UIButton()
-        alternativeButton.layer.cornerRadius = appearance.alternativeButtonCornerRadius
+        if appearance.alternativeButtonCornerRadiusHalfHeigth {
+            alternativeButton.layer.cornerRadius = alternativeButton.frame.height / 2
+        } else {
+            alternativeButton.layer.cornerRadius = appearance.alternativeButtonCornerRadius
+        }
         
         if #available(iOS 13, *) {
             alternativeButton.layer.cornerCurve = .continuous

@@ -1,5 +1,9 @@
 # _BulletinBoard_ Changelog
 ## Unreleased
+## 🔖 v5.0.1
+### Changes
+- Added new parameters to make the view more customizable
+- Added missing height constraint in image view
 
 ## 🔖 v5.0.0
 ### Changes

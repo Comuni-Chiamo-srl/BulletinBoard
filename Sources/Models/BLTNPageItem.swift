@@ -191,6 +191,7 @@ import UIKit
             let imageView = UIImageView(image: image)
             imageView.contentMode = .scaleAspectFit
             imageView.tintColor = appearance.imageViewTintColor
+            imageView.heightAnchor.constraint(lessThanOrEqualToConstant: CGFloat(128)).isActive = true
             
             if let accessibilityLabel = imageAccessibilityLabel {
                 imageView.isAccessibilityElement = true
