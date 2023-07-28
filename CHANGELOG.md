@@ -1,5 +1,9 @@
 # _BulletinBoard_ Changelog
 ## Unreleased
+## 🔖 v5.0.5
+### Fixes
+- Removed imageview on landscape to improve UI/UX and accessibility
+
 ## 🔖 v5.0.4
 ### Fixes
 - Fixed device orientation management

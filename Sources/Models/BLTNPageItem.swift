@@ -187,6 +187,13 @@ import UIKit
         insertComplementaryViews(makeViewsUnderTitle)
         
         // Image View
+        switch UIDevice.current.orientation {
+            case .landscapeLeft, .landscapeRight:
+                self.isWithImageView = false
+            default:
+                // do nothing
+                break
+        }
         if let image = self.image, self.isWithImageView {
             let imageView = UIImageView(image: image)
             imageView.contentMode = .scaleAspectFit
